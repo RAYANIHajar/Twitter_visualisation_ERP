@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="twit_principale_form_view" model="ir.ui.view">
+            <field name="name">twit.principale.form</field>
+            <field name="model">twit.principale</field>
+            <field name="arch" type="xml">
+                <form string="principale" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="Principale">
+                                <group>
+                                    <field name="twit"/>
+                                </group>
+                            </page>
+                            <page string="Departements">
+                                <group>
+                                    
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="twit.principale_tree">
+            <field name="name">twit.principale.tree</field>
+            <field name="model">twit.principale</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="liste twitters">
+                    <field name="twit"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_principale_seq">
+            <field name="name">action principale</field>
+            <field name="res_model">twit.principale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="twitter" name="Twitter"/>
+        <menuitem name="menu twitter" id="section_main_menu_principale" parent="twitter"/>
+        <menuitem name="principale" id="real_menu_principale" parent="section_main_menu_principale" action="action_principale_seq"/>
+    </data>
+</openerp>
