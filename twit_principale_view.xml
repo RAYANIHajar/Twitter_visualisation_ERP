@@ -6,16 +6,28 @@
             <field name="model">twit.principale</field>
             <field name="arch" type="xml">
                 <form string="principale" version="7.0">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="" />
+                        <button name="redact" string="Rediger" states="draft" type="workflow" class="oe_highlight" />
+                        <button name="publish" string="Publier" states="redact" type="workflow" class="oe_highlight" />
+                    </header>
                     <sheet>
                         <notebook>
-                            <page string="Principale">
+                            <page string="principale">
                                 <group>
-                                    <field name="twit"/>
+                                    <field name="id_pub"/>
+                                    <field name="author_id"/>
+                                    <field name="text"/>
+                                    <field name="created_at"/>
+                                    <field name="retweet_count"/>
+                                    <field name="source"/>
+                                    <field name="reply_count"/>
+                                    <field name="like_count"/>
+                                    <field name="quote_count"/>
                                 </group>
                             </page>
-                            <page string="Departements">
+                            <page string="Categorie">
                                 <group>
-                                    
                                 </group>
                             </page>
                         </notebook>
@@ -29,18 +41,46 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="liste twitters">
-                    <field name="twit"/>
+                    <field name="id_pub"/>
+                    <field name="author_id"/>
+                    <field name="text"/>
+                    <field name="created_at"/>
+                    <field name="retweet_count"/>
+                    <field name="source"/>
+                    <field name="reply_count"/>
+                    <field name="like_count"/>
+                    <field name="quote_count"/>
                 </tree>
             </field>
         </record>
+        <record id="principale_graph" model="ir.ui.view">
+            <field name="name">twit.principale.graph</field>
+            <field name="model">twit.principale</field>
+            <field name="arch" type="xml">
+                <graph string="graphique" version="7.0" type="bar">
+                    <field name="id_pub"/>
+                    <field name="retweet_count"/>
+                </graph>
+            </field>
+        </record> 
+        <record id="principale_graph" model="ir.ui.view">
+            <field name="name">twit.principale.graph</field>
+            <field name="model">twit.principale</field>
+            <field name="arch" type="xml">
+                <graph string="graphique" version="7.0" type="bar">
+                    <field name="created_at"/>
+                    <field name="like_count"/>
+                </graph>
+            </field>
+        </record>   
         <record model="ir.actions.act_window" id="action_principale_seq">
-            <field name="name">action principale</field>
+            <field name="name">Tweets recents</field>
             <field name="res_model">twit.principale</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,graph</field>
         </record>
         <menuitem id="twitter" name="Twitter"/>
-        <menuitem name="menu twitter" id="section_main_menu_principale" parent="twitter"/>
-        <menuitem name="principale" id="real_menu_principale" parent="section_main_menu_principale" action="action_principale_seq"/>
+        <menuitem name="personnage connue" id="section_main_menu_principale" parent="twitter"/>     
+        <menuitem name="menu principale" id="real_menu_principale" parent="section_main_menu_principale" action="action_principale_seq"/>
     </data>
 </openerp>

@@ -1,0 +1,41 @@
+<openerp>
+    <data>
+    <!--Creation de workflow -->
+        <record model="workflow" id="twit_principale_wkf">
+            <field name="name">twit.principale.wkf</field>
+            <field name="osv">twit.principale</field>
+            <field name="on_create">True</field>
+        </record>
+        <!--Activités -->
+        <record model="workflow.activity" id="twit_principale_wkf_act_draft">
+            <field name="wkf_id" ref="twit_principale_wkf"/>
+            <field name="flow_start">True</field>
+            <field name="name">Draft</field>
+            <field name="kind">function</field>
+            <field name="action">_draft_fcn()</field>
+        </record>
+        <record model="workflow.activity" id="twit_principale_wkf_act_redact">
+            <field name="wkf_id" ref="twit_principale_wkf"/>
+            <field name="name">Rediger</field>
+            <field name="kind">function</field>
+            <field name="action">_redact_fcn()</field>
+        </record>
+        <record model="workflow.activity" id="twit_principale_wkf_act_Publier">
+            <field name="wkf_id" ref="twit_principale_wkf"/>
+            <field name="name">Publier</field>
+            <field name="kind">function</field>
+            <field name="action">_publish_fcn()</field>
+        </record>
+        <!--Transitions -->
+        <record model="workflow.transition" id="twit_principale_wkf_tr1">
+            <field name="act_from" ref="twit_principale_wkf_act_draft" />
+            <field name="act_to" ref="twit_principale_wkf_act_redact" />
+            <field name="signal">redact</field>
+        </record>
+        <record model="workflow.transition" id="twit_principale_wkf_tr2">
+            <field name="act_from" ref="twit_principale_wkf_act_redact" />
+            <field name="act_to" ref="twit_principale_wkf_act_Publier" />
+            <field name="signal">publish</field>
+        </record>
+    </data>
+</openerp>

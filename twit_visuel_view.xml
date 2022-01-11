@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="twit.visuel_tree">
+            <field name="name">twit.visuel.tree</field>
+            <field name="model">twit.visuel</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="liste twitters">
+                    <field name="id_pub"/>
+                    <field name="like_count"/>
+                </tree>
+            </field>
+        </record>   
+        <record id="visuel_graph1" model="ir.ui.view">
+            <field name="name">twit.visuel.graph</field>
+            <field name="model">twit.visuel</field>
+            <field name="arch" type="xml">
+                <graph string="articles/likes" version="7.0" type="pie">
+                    <field name="id_pub" />
+                    <field name="like_count" type="measure"/>
+                </graph>
+            </field>
+        </record> 
+        <record model="ir.actions.act_window" id="action_visuel_seq">
+            <field name="name">tweets/Likes</field>
+            <field name="res_model">twit.visuel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,graph</field>
+        </record>
+        <menuitem id="twitter" name="Twitter"/>
+        <menuitem name="visualisation" id="section_main_menu_visuel" parent="twitter"/>
+        <menuitem name="Article/likes" id="real_menu_visuel" parent="section_main_menu_visuel" action="action_visuel_seq"/>
+    </data>
+</openerp>

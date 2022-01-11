@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="twit_terme_form_view" model="ir.ui.view">
+            <field name="name">twit.terme.form</field>
+            <field name="model">twit.terme</field>
+            <field name="arch" type="xml">
+                <form string="terme" version="7.0">
+                    <sheet>
+                        <notebook>
+                            <page string="terme">
+                                <group>
+                                    <field name="id_pub"/>
+                                    <field name="author_id"/>
+                                    <field name="text"/>
+                                    <field name="created_at"/>
+                                    <field name="retweet_count"/>
+                                    <field name="source"/>
+                                    <field name="reply_count"/>
+                                    <field name="like_count"/>
+                                    <field name="quote_count"/>
+                                </group>
+                            </page>
+                            <page string="Categorie">
+                                <group>
+                                    
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="twit.terme_tree">
+            <field name="name">twit.terme.tree</field>
+            <field name="model">twit.terme</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="liste twitters">
+                    <field name="id_pub"/>
+					<field name="author_id"/>
+					<field name="text"/>
+					<field name="created_at"/>
+					<field name="retweet_count"/>
+                    <field name="source"/>
+                    <field name="reply_count"/>
+                    <field name="like_count"/>
+                    <field name="quote_count"/>
+                </tree>
+            </field>
+        </record>
+        <record id="terme_graph" model="ir.ui.view">
+            <field name="name">twit.terme.graph</field>
+            <field name="model">twit.terme</field>
+            <field name="arch" type="xml">
+                <graph string="terme_analysis" version="7.0" type="bar">
+                    <field name="created_at"/>
+                    <field name="like_count"/>
+                </graph>
+            </field>
+        </record>       
+        <record model="ir.actions.act_window" id="action_terme_seq">
+            <field name="name">tweets recents</field>
+            <field name="res_model">twit.terme</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,kanban</field>
+        </record>
+        <menuitem id="twitter" name="Twitter"/>
+        <menuitem name="Terme abordable" id="section_main_menu_terme" parent="twitter"/>
+        <menuitem name="menu terme" id="real_menu_terme" parent="section_main_menu_terme" action="action_terme_seq"/>
+    </data>
+</openerp>
